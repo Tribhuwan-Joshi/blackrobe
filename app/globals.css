@@ -4,9 +4,9 @@
 
 @layer utilities {
   .h1 {
-    @apply text-3xl tracking-wider;
+    @apply text-3xl tracking-wide;
   }
   .h2 {
-    @apply text-2xl tracking-wider;
+    @apply text-2xl tracking-wide;
   }
 }
