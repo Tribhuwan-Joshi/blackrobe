@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 const ContractDropdowns = () => {
   const [contractType, setContractType] = useState("");
   const [country, setCountry] = useState("");
-  const [law, setLaw] = useState("");
   const [resolution, setResolution] = useState("");
   const [confidentiality, setConfidentiality] = useState("");
   const [indemnification, setIndemnification] = useState("");
@@ -21,7 +20,6 @@ const ContractDropdowns = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  if (session) console.log(session);
   const handleCreateContract = async () => {
     setError("");
     if (
@@ -49,15 +47,23 @@ const ContractDropdowns = () => {
         termination: termination,
         additionalInfo: additionalInfo,
       });
+      console.log("contract is ", contract);
+      router.push("/contracts/" + contract.data.id);
       setIsSubmitting(false);
     } catch (err) {
       setIsSubmitting(false);
-      console.log(err);
+      console.log("error");
     }
   };
 
   return (
-    <Flex my="8" direction="column" gap="8" className="mx-auto">
+    <Flex
+      my="8"
+      direction="column"
+      gap="8"
+      justify="center"
+      className="mx-auto w-[80%]"
+    >
       <div>
         <label
           htmlFor="contractType"
@@ -67,12 +73,12 @@ const ContractDropdowns = () => {
         </label>
         <select
           id="contractType"
-          className="w-[50%] rounded-md"
+          className="w-[90%] md:w-[60%] rounded-md"
           value={contractType}
           onChange={(e) => setContractType(e.target.value)}
         >
           <option value="">Select type of contract</option>
-          <option value="Employment Contract">Rent Agreement</option>
+          <option value="Rent Agreement">Rent Agreement</option>
           <option value="Employment Contract">Employment Contract</option>
           <option value="Service Agreement">Service Agreement</option>
           <option value="Lease Agreement">Lease Agreement</option>
@@ -96,7 +102,7 @@ const ContractDropdowns = () => {
         </label>
         <select
           id="country"
-          className="w-[50%]"
+          className="w-[90%] md:w-[60%]"
           value={country}
           onChange={(e) => setCountry(e.target.value)}
         >
@@ -116,7 +122,7 @@ const ContractDropdowns = () => {
         </label>
         <select
           id="resolution"
-          className="w-[50%]"
+          className="w-[90%] md:w-[60%]"
           value={resolution}
           onChange={(e) => setResolution(e.target.value)}
         >
@@ -135,7 +141,7 @@ const ContractDropdowns = () => {
         </label>
         <select
           id="confidentiality"
-          className="w-[50%]"
+          className="w-[90%] md:w-[60%]"
           value={confidentiality}
           onChange={(e) => setConfidentiality(e.target.value)}
         >
@@ -153,7 +159,7 @@ const ContractDropdowns = () => {
         </label>
         <select
           id="indemnification"
-          className="w-[50%]"
+          className="w-[90%] md:w-[60%]"
           value={indemnification}
           onChange={(e) => setIndemnification(e.target.value)}
         >
@@ -171,7 +177,7 @@ const ContractDropdowns = () => {
         </label>
         <select
           id="termination"
-          className="w-[50%]"
+          className="w-[90%] md:w-[60%]"
           value={termination}
           onChange={(e) => setTermination(e.target.value)}
         >
@@ -193,12 +199,13 @@ const ContractDropdowns = () => {
           onChange={(e) => setAdditionalInfo(e.target.value)}
           size="3"
           id="info"
-          className="w-[50%] border border-gray-700 text-2xl"
+          className="w-[90%] md:w-[60%] border border-gray-700 text-2xl"
           placeholder="Information regarding the contract"
         />
       </div>
       {session ? (
         <div>
+          {error && <p className="text-red-700 text-base">{error}</p>}
           <Button
             variant="classic"
             className="w-[200px] border"
@@ -208,7 +215,6 @@ const ContractDropdowns = () => {
           >
             Create Contract {isSubmitting && <Spinner />}
           </Button>
-          {error && <p className="text-red-700 text-base">{error}</p>}
         </div>
       ) : (
         <Button

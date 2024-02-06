@@ -26,7 +26,9 @@ const Navbar = () => {
               height={52}
               className="rounded-full"
             />
-            <h1 className="h2 md:h1">Blackrobe</h1>
+            <h1 className="h2 md:h1">
+              <Link href="/">Blackrobe</Link>{" "}
+            </h1>
           </Flex>
           <AuthButtons />
         </Flex>
