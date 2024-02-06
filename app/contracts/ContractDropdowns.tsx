@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
-import { Button, Flex } from "@radix-ui/themes";
+import { Button, Flex, TextArea } from "@radix-ui/themes";
 import axios from "axios";
 import Spinner from "../components/Spinner";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const ContractDropdowns = () => {
   const [contractType, setContractType] = useState("");
@@ -12,12 +14,46 @@ const ContractDropdowns = () => {
   const [confidentiality, setConfidentiality] = useState("");
   const [indemnification, setIndemnification] = useState("");
   const [termination, setTermination] = useState("");
+  const [additionalInfo, setAdditionalInfo] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
-  const handleCreateContract = () => {
-    // Call the API with the selected values
-    // Add API call here
+  if (session) console.log(session);
+  const handleCreateContract = async () => {
+    setError("");
+    if (
+      !(
+        contractType &&
+        country &&
+        resolution &&
+        confidentiality &&
+        indemnification &&
+        termination
+      )
+    ) {
+      setError("Please Provide required Information");
+
+      return;
+    }
+    try {
+      setIsSubmitting(true);
+      const contract = await axios.post("/api/contract", {
+        contractType: contractType,
+        country: country,
+        resolution: resolution,
+        confidentiality: confidentiality,
+        indemnification: indemnification,
+        termination: termination,
+        additionalInfo: additionalInfo,
+      });
+      setIsSubmitting(false);
+    } catch (err) {
+      setIsSubmitting(false);
+      console.log(err);
+    }
   };
 
   return (
@@ -70,25 +106,7 @@ const ContractDropdowns = () => {
           <option value="Spain">Spain</option>
         </select>
       </div>
-      <div>
-        <label
-          htmlFor="law"
-          className="text-sm block font-semibold text-gray-600 mb-1"
-        >
-          Choice of Law <span className="text-red-500">*</span>
-        </label>
-        <select
-          id="law"
-          className="w-[50%]"
-          value={law}
-          onChange={(e) => setLaw(e.target.value)}
-        >
-          <option value="">Select governing law</option>
-          <option value="New York">New York</option>
-          <option value="California">California</option>
-          <option value="Texas">Texas</option>
-        </select>
-      </div>
+
       <div>
         <label
           htmlFor="resolution"
@@ -163,19 +181,47 @@ const ContractDropdowns = () => {
           <option value="Bankruptcy">Bankruptcy</option>
         </select>
       </div>
-      <Button
-        variant="classic"
-        className="w-[200px] border"
-        style={{ cursor: "pointer" }}
-        onClick={handleCreateContract}
-        disabled={isSubmitting}
-      >
-        Create Contract {isSubmitting && <Spinner />}
-      </Button>
+      <div>
+        <label
+          htmlFor="info"
+          className="text-sm block font-semibold text-gray-600 mb-1"
+        >
+          Additional Information
+        </label>
+        <TextArea
+          value={additionalInfo}
+          onChange={(e) => setAdditionalInfo(e.target.value)}
+          size="3"
+          id="info"
+          className="w-[50%] border border-gray-700 text-2xl"
+          placeholder="Information regarding the contract"
+        />
+      </div>
+      {session ? (
+        <div>
+          <Button
+            variant="classic"
+            className="w-[200px] border"
+            style={{ cursor: "pointer" }}
+            onClick={handleCreateContract}
+            disabled={isSubmitting}
+          >
+            Create Contract {isSubmitting && <Spinner />}
+          </Button>
+          {error && <p className="text-red-700 text-base">{error}</p>}
+        </div>
+      ) : (
+        <Button
+          variant="classic"
+          style={{ cursor: "pointer" }}
+          className="w-[200px] border"
+          onClick={() => signIn("google")}
+        >
+          Sign In
+        </Button>
+      )}
     </Flex>
   );
 };
 
 export default ContractDropdowns;
-
-

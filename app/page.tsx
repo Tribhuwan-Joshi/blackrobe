@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import axios from "axios";
-import ContractDropdowns from "./contract/ContractDropdowns";
+import ContractDropdowns from "./contracts/ContractDropdowns";
 import { Box } from "@radix-ui/themes";
-import Contract from "./contract/Contract";
+import Contract from "./contracts/Contract";
 
 export default function Home() {
   return (

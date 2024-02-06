@@ -72,6 +72,14 @@ const AuthButtons = () => {
         <DropdownMenu.Content variant="solid">
           <DropdownMenu.Item>{session?.user?.email}</DropdownMenu.Item>
           <DropdownMenu.Item>
+            <Link
+              href="/contracts"
+              className={`${pathname === "/"}? underline : ''`}
+            >
+              Saved Contracts
+            </Link>
+          </DropdownMenu.Item>
+          <DropdownMenu.Item>
             <a onClick={() => signOut()}>logout</a>
           </DropdownMenu.Item>
         </DropdownMenu.Content>
