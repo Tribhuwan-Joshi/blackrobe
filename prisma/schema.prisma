@@ -18,7 +18,7 @@ model Contract {
 }
 
 model Account {
-  id                String  @id @default(cuid())
+  id                String  @id @unique @default(cuid())
   userId            String
   type              String
   provider          String
