@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import axios from "axios";
-import ContractDropdowns from "./components/ContractDropdowns";
+import ContractDropdowns from "./contract/ContractDropdowns";
 import { Box } from "@radix-ui/themes";
+import Contract from "./contract/Contract";
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
         legal documents and hello to a more efficient and streamlined process
         with Blackrobe.
       </p>
-      <ContractDropdowns />
+      <Contract />
     </Box>
   );
 }
