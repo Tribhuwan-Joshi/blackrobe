@@ -45,7 +45,7 @@ const AuthButtons = () => {
   if (status === "unauthenticated")
     return (
       <>
-        <Link href="/" className={`${pathname === "/"}? underline : ''`}>
+        <Link href="/" className={pathname === "/" ? "underline" : ""}>
           Home
         </Link>
         <Button
@@ -86,9 +86,10 @@ const AuthButtons = () => {
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>
-      <Link href="/" className={`${pathname === "/"}? underline : ''`}>
+      <Link href="/" className={pathname === "/" ? "underline" : ""}>
         Home
       </Link>
+
       <button
         className="cursor-pointer hidden border p-1 px-2 rounded-md border-blue-400 hover:bg-blue-100 text-blue-600 md:block"
         onClick={() => signOut()}

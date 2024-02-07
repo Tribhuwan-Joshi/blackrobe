@@ -19,7 +19,6 @@ const ContractDropdowns = () => {
   const [error, setError] = useState("");
   const router = useRouter();
   const { data: session, status } = useSession();
-  console.log("session is ", session);
   const handleCreateContract = async () => {
     setError("");
     if (
@@ -47,12 +46,12 @@ const ContractDropdowns = () => {
         termination: termination,
         additionalInfo: additionalInfo,
       });
-      console.log("contract is ", contract);
+
       router.push("/contracts/" + contract.data.id);
       setIsSubmitting(false);
     } catch (err) {
       setIsSubmitting(false);
-      console.log("error");
+      setError("Unexpected Error Occured");
     }
   };
 
@@ -73,7 +72,7 @@ const ContractDropdowns = () => {
         </label>
         <select
           id="contractType"
-          className="w-[90%] md:w-[60%] rounded-md"
+          className="w-[90%] md:w-[60%] rounded-md "
           value={contractType}
           onChange={(e) => setContractType(e.target.value)}
         >
@@ -102,7 +101,7 @@ const ContractDropdowns = () => {
         </label>
         <select
           id="country"
-          className="w-[90%] md:w-[60%]"
+          className="w-[90%] md:w-[60%] rounded-md"
           value={country}
           onChange={(e) => setCountry(e.target.value)}
         >
@@ -122,7 +121,7 @@ const ContractDropdowns = () => {
         </label>
         <select
           id="resolution"
-          className="w-[90%] md:w-[60%]"
+          className="w-[90%] md:w-[60%] rounded-md"
           value={resolution}
           onChange={(e) => setResolution(e.target.value)}
         >
@@ -141,7 +140,7 @@ const ContractDropdowns = () => {
         </label>
         <select
           id="confidentiality"
-          className="w-[90%] md:w-[60%]"
+          className="w-[90%] md:w-[60%] rounded-md"
           value={confidentiality}
           onChange={(e) => setConfidentiality(e.target.value)}
         >
@@ -159,7 +158,7 @@ const ContractDropdowns = () => {
         </label>
         <select
           id="indemnification"
-          className="w-[90%] md:w-[60%]"
+          className="w-[90%] md:w-[60%] rounded-md"
           value={indemnification}
           onChange={(e) => setIndemnification(e.target.value)}
         >
@@ -177,7 +176,7 @@ const ContractDropdowns = () => {
         </label>
         <select
           id="termination"
-          className="w-[90%] md:w-[60%]"
+          className="w-[90%] md:w-[60%] rounded-md"
           value={termination}
           onChange={(e) => setTermination(e.target.value)}
         >
@@ -199,7 +198,7 @@ const ContractDropdowns = () => {
           onChange={(e) => setAdditionalInfo(e.target.value)}
           size="3"
           id="info"
-          className="w-[90%] md:w-[60%] border border-gray-700 text-2xl"
+          className="w-[90%] md:w-[60%] rounded-md border border-gray-700 text-2xl"
           placeholder="Information regarding the contract"
         />
       </div>

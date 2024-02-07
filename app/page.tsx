@@ -7,7 +7,7 @@ import Contract from "./contracts/Contract";
 export default function Home() {
   return (
     <Box mt="4">
-      <p className="bg-blue-600 mx-auto rounded-md line text-white md:leading-8 text-lg md:text-xl p-2 md:p-3">
+      <p className="bg-blue-600  rounded-md line text-white md:leading-8 text-md mx-2 md:text-xl p-2 md:p-3">
         Blackrobe is a cutting-edge platform that utilizes AI to generate legal
         contracts quickly and accurately. Say goodbye to the hassle of drafting
         legal documents and hello to a more efficient and streamlined process

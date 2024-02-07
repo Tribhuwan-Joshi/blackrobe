@@ -7,13 +7,13 @@ import Link from "next/link";
 const ContractList = ({ contracts }: { contracts: Contract[] }) => {
   return (
     <Flex gap="2" direction="column">
-      {contracts.map((c) => (
+      {contracts.map((c, _id) => (
         <Link
           key={c.id}
           className="hover:underline decoration-blue-600 w-fit text-blue-800 block"
           href={`/contracts/${c.id}`}
         >
-          {c.id}. {c.title}{" "}
+          {_id + 1}. {c.title}{" "}
         </Link>
       ))}
     </Flex>

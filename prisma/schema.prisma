@@ -15,7 +15,7 @@ model Contract {
   title     String   @db.VarChar(255)
   content   String   @db.Text
   createdAt DateTime @default(now())
-  
+  userEmail String   @db.VarChar(255)
 }
 
 model Account {
