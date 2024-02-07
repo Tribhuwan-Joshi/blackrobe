@@ -17,9 +17,9 @@ const ContractDropdowns = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const { data: session, status } = useSession();
   const router = useRouter();
-
+  const { data: session, status } = useSession();
+  console.log("session is ", session);
   const handleCreateContract = async () => {
     setError("");
     if (

@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   const session = await getServerSession(authOptions);
   if (!session) return NextResponse.json({}, { status: 401 });
-
+ 
   const aiResponse = await getResponse(body);
 
   const newContract = await prisma.contract.create({
