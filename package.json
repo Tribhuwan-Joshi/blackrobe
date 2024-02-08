@@ -15,6 +15,7 @@
     "axios": "^1.6.7",
     "flowbite": "^2.2.1",
     "flowbite-react": "^0.7.2",
+    "fly": "^4.6.3",
     "next": "14.1.0",
     "next-auth": "^4.24.5",
     "openai": "^4.26.0",

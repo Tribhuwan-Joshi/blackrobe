@@ -9,6 +9,8 @@ import { notFound, redirect } from "next/navigation";
 const page = async () => {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/");
+  await prisma.contract.deleteMany();
+  console.log("deleted db");
   const contracts = await prisma.contract.findMany({
     where: {
       userEmail: session?.user?.email!,
